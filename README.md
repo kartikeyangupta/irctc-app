@@ -88,6 +88,14 @@ $ python app.py
 
 6. Navigate to [http://localhost:5000](http://localhost:5000)
 
+## Application is available on Github:
+
+https://github.com/kartikeyangupta/irctc-app
+
+## Application is Deployed to VM in Digital Ocean.
+
+http://peerconnected.com:8000/get/booking/
+
 ## API Endpoints.
 
 1. Add User (ADMIN ONLY)
