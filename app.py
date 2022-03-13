@@ -1,3 +1,4 @@
+from crypt import methods
 from flask import Flask, render_template, request, jsonify, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 import logging
@@ -11,38 +12,27 @@ app = Flask(__name__)
 app.config.from_object('config')
 db = SQLAlchemy(app)
 
-@app.route('/add/user', methods=['GET'])
+
+@app.route('/')
 def add_user():
+    print('123')
+    # username = request.data()
+    return jsonify({"ans": "username"}), 200
     # username = request.para
-    return render_template('pages/placeholder.home.html'), 200
 
+    # return render_template('pages/placeholder.home.html'), 200
 
-@app.route('/add/image/',)
-def add_image():
-    return render_template('pages/placeholder.add_image.html'), 200
-
-@app.route('/add/image/render/<string:filename>',methods = ['GET', 'POST'])
-def render_image(filename):
-    if request.method == 'POST':
-        image = request.file['image']
-        anwser = "THIS IS THE CORRECT ANWSER"
-        # anwser = get_anwser(image)
-        return anwser, 200
-    else:
-        return jsonify({'result' : filename }), 200
 
 # Error handlers.
-
-
 @app.errorhandler(500)
 def internal_error(error):
-    return jsonify({'result': False, "message":"Internal Server error"}), 500
+    return jsonify({'result': False, "message": "Internal Server error"}), 500
 
 
-@app.errorhandler(404) 
-def not_found(error):
-    return jsonify({'result': False, "message": "API doesn't exist"}), 404
-    
+# @app.errorhandler(404)
+# def not_found(error):
+#     return jsonify({'result': False, "message": "API doesn't exist"}), 404
+
 
 # if not app.debug:
 #     file_handler = FileHandler('error.log')
