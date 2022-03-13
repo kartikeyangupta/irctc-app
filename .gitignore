@@ -2,3 +2,5 @@
 .DS_Store
 env
 venv
+testenv/
+__pycache__/

@@ -1,3 +1,4 @@
+from email.policy import default
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
@@ -5,11 +6,11 @@ from sqlalchemy.ext.declarative import declarative_base
 from app import db
 
 engine = create_engine('sqlite:///database.db', echo=True)
-# db_session = scoped_session(sessionmaker(autocommit=False,
-#                                          autoflush = False,
-#                                          bind = engine))
+db_session = scoped_session(sessionmaker(autocommit=True,
+                                         autoflush = True,
+                                         bind = engine))
 Base = declarative_base()
-# Base.query = db_session.query_property()
+Base.query = db_session.query_property()
 
 # Set your classes here.
 
@@ -24,7 +25,7 @@ class Role(Base):
         self.name = name
 
     def __repr__(self):
-        return '<Role %r>' % self.name
+        return '<Role {} {}>'.format(self.name, self.id)
 
 
 class User(Base):
@@ -36,12 +37,10 @@ class User(Base):
     role_id = db.Column(db.Integer, db.ForeignKey('Role.id'),
                         nullable=False)
 
-    def __init__(self, name=None, password=None, isAdmin=False):
+    def __init__(self, name=None, password=None, role_id=role_id):
         self.name = name
         self.password = password
-        self.role_id = 1
-        if isAdmin == True:
-            self.role_id = 2
+        self.role_id = role_id
 
     def __repr__(self):
         return '<User %r>' % self.name
@@ -52,12 +51,14 @@ class Coach(Base):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), unique=True, nullable=False)
-
-    def __init__(self, name=None):
+    total_seats = db.Column(db.Integer, nullable=False, default=60)
+    
+    def __init__(self, name=None, total_seats=60):
         self.name = name
+        self.total_seats = total_seats
 
     def __repr__(self):
-        return '<Coach %r>' % self.name
+        return 'Coach {} {}'.format(self.name, self.total_seats)
 
 
 class Train(Base):
@@ -87,7 +88,7 @@ class TrainCoach(Base):
         self.coach_id = coach_id
 
     def __repr__(self):
-        return '<TrainCoach %r>' % self.id
+        return 'TrainCoach {} {} {}'.format(self.id, self.train_id, self.coach_id)
 
 
 class Booking(Base):
@@ -109,5 +110,15 @@ class Booking(Base):
         return '<Booking %r>' % self.id
 
 
+
+# Uncomment the following code to create database and fill initial data.
+
 # Create tables.
-Base.metadata.create_all(bind=engine)
+# Base.metadata.create_all(bind=engine)
+# db.session.add(Role(name="User"))
+# db.session.add(Role(name="Admin"))
+# db.session.add(Coach(name="AC", total_seats=60))
+# db.session.add(Coach(name="Sleeper", total_seats=60))
+# db.session.add(Coach(name="Seater", total_seats=120))
+# db.session.add(User(name="admin", password="admin",  role_id=1))
+# db.session.commit()

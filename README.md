@@ -1,15 +1,14 @@
 ## Welcome
 
-Agent-Chanda is a Software as a Service(SaaS) which provides a user awnsers to MCQ questions.
+This application was developed for Zepto Hacker-Earth Test "Zepto Software Engineer Hiring Challenge".
 
 ## Project Structure
 
-```sh
+```
 ├── README.md
 ├── app.py
 ├── config.py
 ├── error.log
-├── forms.py
 ├── models.py
 ├── requirements.txt
 ├── static
@@ -56,8 +55,6 @@ Agent-Chanda is a Software as a Service(SaaS) which provides a user awnsers to M
     │   ├── form.html
     │   └── main.html
     └── pages
-        ├── placeholder.about.html
-        └── placeholder.home.html
 ```
 
 ### Quick Start
@@ -96,7 +93,56 @@ $ python app.py
 1. Add User (ADMIN ONLY)
 
 ```
-URL Path : /add/user?name=<name>&password=<>&isAdmin=<>
-
+URL Path : /add/user/
 The API is for admin only, admin can add users and make him admin or not.
+```
+
+2.
+
+```
+URL PATH : /add/train/
+Usercase : Add a train in Database
+       Roles: AdminOnly
+       Method: Post
+       Params : name
+```
+
+3.
+
+```
+URL PATH : /add/train_coach/
+Usercase : Add a Coach for a specific train in Database
+       Roles: AdminOnly
+       Method: Post
+       Params : TrainName, CoachName
+```
+
+4.
+
+```
+URL PATH: /remove/train_coach/
+ Usercase : Remove a Coach for a specfic train in Database
+       Roles: AdminOnly
+       Method: Delete
+       Params : id<Integer>
+```
+
+5.
+
+```
+URL PATH : /add/booking/
+ Usercase : Add a booking in Database
+       Roles: all
+       Method: Post
+       Params : TrainName, CoachName, username
+```
+
+6.
+
+```
+URL PATH : /get/booking/
+Usercase : Get all booking in Database
+       Roles: all
+       Method: Get
+       Params : None
 ```
