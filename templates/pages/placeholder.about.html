@@ -1,0 +1,17 @@
+{% extends 'layouts/main.html' %}
+{% block title %}About{% endblock %}
+{% block content %}
+
+<div class="page-header">
+  <h1>About Agent-Chanda</h1>
+</div>
+<p class="lead">Find Anwser to MCQs with a click.</p>
+<!-- TODO :  change the URL to TODO-->
+<p class="lead">The Application is actively developed, you can check <a href= "{{ url_for('not_found') }}">TODO</a> list to check the current developing features.</p>
+<!-- TODO :  Change the URL to suggestion box form -->
+<p class="lead">Would Like to report an error or suggest changes, please provide it though the <a href= "{{ url_for('not_found') }}">suggestion box</a>.</p>
+<!-- TODO :  Add your portfolio webpage link or create one here only.-->
+<p class="lead">Check the Authors : <a href="https://kartikeyangupta.github.io"> Kartikeyan Gupta</a>, <a href="{{ url_for('not_found') }} "> Manmeet Gandhi</a>, , <a href="{{ url_for('not_found') }} "> Shivam Singh</a>.</p>
+<p></p>
+
+{% endblock %}
